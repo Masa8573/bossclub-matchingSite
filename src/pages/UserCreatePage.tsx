@@ -20,7 +20,13 @@ export const UserCreatePage: React.FC = () => {
     setError(null)
 
     try {
-      const { error } = await createUserWithProfile(formData)
+      
+      const dataToSubmit = {
+        ...formData,
+        password: formData.password,
+      };
+
+      const { error } = await createUserWithProfile(dataToSubmit);
       if (error) throw error
 
       navigate('/admin')
