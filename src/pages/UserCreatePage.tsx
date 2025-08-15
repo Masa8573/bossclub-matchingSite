@@ -12,7 +12,7 @@ export const UserCreatePage: React.FC = () => {
 
   const handleSubmit = async (formData: UserFormData) => {
 
-    if (!data.password) {
+    if (!formData.password) {
       alert('パスワードは必須です');
       return;
     }
