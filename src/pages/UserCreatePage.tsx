@@ -80,3 +80,4 @@ export const UserCreatePage: React.FC = () => {
     </AdminLayout>
   )
 }
+
