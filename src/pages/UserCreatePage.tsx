@@ -15,6 +15,7 @@ export const UserCreatePage: React.FC = () => {
     if (!data.password) {
       alert('パスワードは必須です');
       return;
+    }
     setLoading(true)
     setError(null)
 
