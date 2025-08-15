@@ -23,6 +23,9 @@ export const AdminDashboardPage: React.FC = () => {
         reviewsApi.getAllReviews()
       ])
 
+      console.log('プロフィール取得結果:', profilesResult);
+      console.log('レビュー取得結果:', reviewsResult);
+
       if (profilesResult.error) throw profilesResult.error
       if (reviewsResult.error) throw reviewsResult.error
 
