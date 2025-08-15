@@ -8,13 +8,15 @@ interface UserFormProps {
   onSubmit: (data: UserFormData) => Promise<void>
   isEditing?: boolean
   loading?: boolean
+  userId?: string // アバターアップロード用のユーザーID
 }
 
 export const UserForm: React.FC<UserFormProps> = ({ 
   initialData, 
   onSubmit, 
   isEditing = false, 
-  loading = false 
+  loading = false,
+  userId 
 }) => {
   const [formData, setFormData] = useState<UserFormData>({
     email: initialData?.email || '',
@@ -25,10 +27,24 @@ export const UserForm: React.FC<UserFormProps> = ({
     title: initialData?.title || '',
     bio: initialData?.bio || '',
     contact_email: initialData?.contact_email || '',
-    phone_number: initialData?.phone_number || ''
+    phone_number: initialData?.phone_number || '',
+    avatar_url: initialData?.avatar_url || null
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const handleAvatarChange = async (avatarUrl: string | null) => {
+    setFormData(prev => ({ ...prev, avatar_url: avatarUrl }))
+    
+    // 編集時は即座にデータベースを更新
+    if (isEditing && userId) {
+      try {
+        await profilesApi.updateProfile(userId, { avatar_url: avatarUrl })
+      } catch (error) {
+        console.error('Failed to update avatar:', error)
+      }
+    }
+  }
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {}
@@ -79,6 +95,24 @@ export const UserForm: React.FC<UserFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      {/* アバター画像アップロード */}
+      {userId && (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          padding: '1.5rem',
+          borderBottom: '1px solid #e5e7eb',
+          marginBottom: '1rem'
+        }}>
+          <AvatarUpload
+            currentAvatarUrl={formData.avatar_url}
+            userId={userId}
+            onAvatarChange={handleAvatarChange}
+            disabled={loading}
+          />
+        </div>
+      )}
+
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(2, 1fr)', 
