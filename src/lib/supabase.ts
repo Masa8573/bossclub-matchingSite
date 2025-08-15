@@ -155,6 +155,7 @@ export const createUserWithProfile = async (userData: {
   bio?: string
   contact_email?: string
   phone_number?: string
+  avatar_url?: string | null
 }) => {
   try {
     // 1. 認証ユーザーを作成
@@ -178,6 +179,7 @@ export const createUserWithProfile = async (userData: {
         bio: userData.bio,
         contact_email: userData.contact_email,
         phone_number: userData.phone_number,
+        avatar_url: userData.avatar_url,
       })
       .select()
       .single()
