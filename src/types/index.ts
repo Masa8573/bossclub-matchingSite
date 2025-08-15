@@ -59,6 +59,7 @@ export interface UserFormData {
   bio: string
   contact_email: string
   phone_number: string
+  avatar_url?: string | null
 }
 
 // Supabase Database型定義
