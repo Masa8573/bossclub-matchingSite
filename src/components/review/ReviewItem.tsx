@@ -45,8 +45,7 @@ export const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
   return (
     <div style={{ 
       borderBottom: '1px solid #e5e7eb', 
-      paddingBottom: '1.5rem',
-      '&:last-child': { borderBottom: 'none' }
+      paddingBottom: '1.5rem'
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
         <div style={{ flexShrink: 0 }}>
