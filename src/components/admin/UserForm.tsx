@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { AvatarUpload } from '../common/AvatarUpload'
+import { profilesApi } from '../../lib/supabase'
 import type { UserFormData } from '../../types'
 
 interface UserFormProps {
