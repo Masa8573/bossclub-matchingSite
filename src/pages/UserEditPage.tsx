@@ -110,7 +110,8 @@ export const UserEditPage: React.FC = () => {
     title: profile.title || '',
     bio: profile.bio || '',
     contact_email: profile.contact_email || '',
-    phone_number: profile.phone_number || ''
+    phone_number: profile.phone_number || '',
+    avatar_url: profile.avatar_url || null
   }
 
   return (
