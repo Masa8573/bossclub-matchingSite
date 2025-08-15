@@ -11,6 +11,10 @@ export const UserCreatePage: React.FC = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async (formData: UserFormData) => {
+
+    if (!data.password) {
+      alert('パスワードは必須です');
+      return;
     setLoading(true)
     setError(null)
 
